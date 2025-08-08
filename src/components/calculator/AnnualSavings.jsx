@@ -366,7 +366,7 @@ export default function AnnualSavings({ calculations, language, translations, to
         <CardHeader className="border-b border-[#0c3133]/10 bg-gradient-to-r from-[#0c3133]/5 via-white to-[#f52e6e]/5 relative">
           <CardTitle className={`flex items-center gap-4 text-[#0c3133] relative z-10 ${isRTL ? 'flex-row-reverse' : ''}`}>
             <div className="w-12 h-12 bg-gradient-to-r from-[#0c3133] to-gray-800 rounded-xl flex items-center justify-center shadow-lg">
-                <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6749582d8_LogoGeneral_110x110_P.png" alt="Atera" className="w-8 h-8" />
+                <img src="/images/6749582d8_LogoGeneral_110x110_P.png" alt="Atera" className="w-8 h-8" />
             </div>
             <div className={`w-full ${isRTL ? 'text-right' : 'text-left'}`}>
               <span className="text-xl font-bold">{language === 'he' ? 'סיכום החזר השקעה' : 'ROI Summary'}</span>
