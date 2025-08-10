@@ -361,7 +361,7 @@ export default function Calculator() {
       `}</style>
       <div id="printable-content" className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
         <div className="print-header">
-          <img src="/images/6749582d8_LogoGeneral_110x110_P.png" alt="Atera Logo" className="h-8" />
+          <img src="/atera-roi-calc/images/6749582d8_LogoGeneral_110x110_P.png" alt="Atera Logo" className="h-8" />
           <div className={`${isRTL ? 'text-left' : 'text-right'}`}>
             <h2 className="text-lg font-bold text-gray-800">{inputs.company_name || 'ROI Report'}</h2>
             <p className="text-sm text-gray-500">{new Date().toLocaleDateString()}</p>
@@ -370,7 +370,7 @@ export default function Calculator() {
         
         <div className="print-title">
           <div className={`inline-flex items-center gap-3 mb-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            <img src="/images/6749582d8_LogoGeneral_110x110_P.png" alt="Atera Logo" className="h-16 w-16" />
+            <img src="/atera-roi-calc/images/6749582d8_LogoGeneral_110x110_P.png" alt="Atera Logo" className="h-16 w-16" />
             <div className={`${isRTL ? 'text-right' : 'text-left'}`}>
               <h1 className="text-4xl font-bold text-[#0c3133]">{t.title}</h1>
             </div>
@@ -382,7 +382,7 @@ export default function Calculator() {
 
         <div className="mb-8 text-center no-print">
           <div className={`inline-flex items-center gap-3 mb-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            <img src="/images/6749582d8_LogoGeneral_110x110_P.png" alt="Atera Logo" className="h-16 w-16" />
+            <img src="/atera-roi-calc/images/6749582d8_LogoGeneral_110x110_P.png" alt="Atera Logo" className="h-16 w-16" />
             <div className={`${isRTL ? 'text-right' : 'text-left'}`}>
               <h1 className="text-4xl font-bold text-[#0c3133]">{t.title}</h1>
             </div>

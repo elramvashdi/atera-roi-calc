@@ -16,7 +16,7 @@ export default function Layout({ children, currentPageName }) {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-4">
               <Link to={createPageUrl("Calculator")} className="flex items-center gap-4">
-                <img src="/images/fca70b82e_Logo_260x641.png" alt="Atera Logo" className="h-10" />
+                <img src="/atera-roi-calc/images/fca70b82e_Logo_260x641.png" alt="Atera Logo" className="h-10" />
               </Link>
               <div className="border-l border-gray-200 pl-4 hidden sm:block">
                  <h1 className="text-lg font-bold text-[#0c3133]">ROI Calculator</h1>
