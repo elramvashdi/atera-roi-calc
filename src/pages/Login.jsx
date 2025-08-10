@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { supabase } from '../api/client';
 import { useNavigate } from 'react-router-dom';
-
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -9,7 +12,6 @@ export default function Login() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -19,36 +21,46 @@ export default function Login() {
     if (error) {
       setError(error.message);
     } else {
-      navigate('/Calculator'); 
+      navigate('/Calculator');
     }
     setLoading(false);
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: 'auto', padding: 32 }}>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          required
-          style={{ width: '100%', marginBottom: 8 }}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          required
-          style={{ width: '100%', marginBottom: 8 }}
-        />
-        <button type="submit" disabled={loading} style={{ width: '100%' }}>
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
-        {error && <div style={{ color: 'red', marginTop: 8 }}>{error}</div>}
-      </form>
+    <div className="flex items-center justify-center min-h-screen bg-background">
+      <Card className="w-full max-w-md shadow-lg">
+        <CardHeader>
+          <CardTitle className="text-center text-2xl font-bold">Sign In</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleLogin} className="space-y-4">
+            <Input
+              type="email"
+              placeholder="Email"
+              autoComplete="username"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
+              autoFocus
+            />
+            <Input
+              type="password"
+              autoComplete="current-password"              
+              placeholder="Password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+            />
+            <Button type="submit" disabled={loading} className="w-full">
+              {loading ? 'Logging in...' : 'Login'}
+            </Button>
+            {error && <div className="text-red-600 text-sm mt-2">{error}</div>}
+          </form>
+          <div className="text-center mt-4">
+            <span>Don't have an account? </span>
+            <Link to="/Signup" className="text-blue-600 hover:underline">Sign Up</Link>
+          </div>
+        </CardContent>
+      </Card>
     </div>
-  );
-}
+  );}

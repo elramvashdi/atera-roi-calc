@@ -1,5 +1,5 @@
 import Layout from "./Layout.jsx";
-
+import AuthGuard from "../components/AuthGuard";
 import Calculator from "./Calculator";
 
 import Reports from "./Reports";
@@ -39,13 +39,9 @@ function PagesContent() {
     return (
         <Layout currentPageName={currentPage}>
             <Routes>            
-                
-                    <Route path="/" element={<Calculator />} />
-                
-                
-                <Route path="/Calculator" element={<Calculator />} />
-                
-                <Route path="/Reports" element={<Reports />} />
+                <Route path="/" element={<AuthGuard><Calculator /></AuthGuard> } />
+                <Route path="/Calculator" element={<AuthGuard><Calculator /></AuthGuard> } />
+                <Route path="/Reports" element={<AuthGuard><Reports /></AuthGuard> } />
                 <Route path="/Login" element={<Login />} />
                 <Route path="/Signup" element={<Signup />} />
                 

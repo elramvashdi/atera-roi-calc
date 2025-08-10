@@ -1,12 +1,20 @@
 
 
 import React from "react";
+import { supabase } from "../api/client";
 import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { Calculator, BarChart3, Settings, FileText } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function Layout({ children, currentPageName }) {
   const location = useLocation();
+  const navigate = useNavigate();
+
+    const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate("/Login");
+  };
 
   return (
     <div className="min-h-screen bg-[#f9f9f9]">
@@ -47,8 +55,15 @@ export default function Layout({ children, currentPageName }) {
                 <BarChart3 className="w-4 h-4 inline mr-2" />
                 Saved Calculations
               </Link>
+               <button
+                onClick={handleSignOut}
+                className="justify-center whitespace-nowrap text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-9 flex items-center gap-2 bg-[#f52e6e] hover:bg-[#f52e6e]/90 text-white font-semibold border-0 px-6 py-3 shadow-lg rounded-lg"
+                title="Sign Out">
+          Sign Out
+        </button>
             </nav>
           </div>
+          
         </div>
       </header>
 

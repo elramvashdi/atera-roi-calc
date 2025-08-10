@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { supabase } from '../api/client';
 import { useNavigate } from 'react-router-dom';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
   const [email, setEmail] = useState('');
@@ -23,37 +27,48 @@ export default function Signup() {
       setError(error.message);
     } else {
       setSuccess('Signup successful! Check your email for confirmation.');
-      navigate('/Calculator');
+      setTimeout(() => navigate('/Calculator'), 1200);
     }
     setLoading(false);
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: 'auto', padding: 32 }}>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSignup}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          required
-          style={{ width: '100%', marginBottom: 8 }}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          required
-          style={{ width: '100%', marginBottom: 8 }}
-        />
-        <button type="submit" disabled={loading} style={{ width: '100%' }}>
-          {loading ? 'Signing up...' : 'Sign Up'}
-        </button>
-        {error && <div style={{ color: 'red', marginTop: 8 }}>{error}</div>}
-        {success && <div style={{ color: 'green', marginTop: 8 }}>{success}</div>}
-      </form>
+    <div className="flex items-center justify-center min-h-screen bg-background">
+      <Card className="w-full max-w-md shadow-lg">
+        <CardHeader>
+          <CardTitle className="text-center text-2xl font-bold">Create Account</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSignup} className="space-y-4">
+            <Input
+              type="email"
+              placeholder="Email"
+              autoComplete="username"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
+              autoFocus
+            />
+            <Input
+              type="password"
+              autoComplete="current-password"
+              placeholder="Password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+            />
+            <Button type="submit" disabled={loading} className="w-full">
+              {loading ? 'Signing up...' : 'Sign Up'}
+            </Button>
+            {error && <div className="text-red-600 text-sm mt-2">{error}</div>}
+            {success && <div className="text-green-600 text-sm mt-2">{success}</div>}
+          </form>
+          <div className="text-center mt-4">
+            <span>Already have an account? </span>
+            <Link to="/Login" className="text-blue-600 hover:underline">Login</Link>
+          </div>          
+        </CardContent>
+      </Card>
     </div>
   );
 }

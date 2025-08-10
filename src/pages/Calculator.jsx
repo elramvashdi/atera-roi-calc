@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect } from "react";
-import { ROICalculation } from "@/api/entities";
 import { Button } from "@/components/ui/button";
 import { Save, Download, RefreshCw, Globe, FileText, File } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -15,6 +14,7 @@ import CoreInputs from "../components/calculator/CoreInputs";
 import IndustryBenchmarks from "../components/calculator/IndustryBenchmarks";
 import IntermediateCalculations from "../components/calculator/IntermediateCalculations";
 import AnnualSavings from "../components/calculator/AnnualSavings";
+import { supabase } from '../api/client';
 
 const defaultInputs = {
   // Core user inputs
@@ -129,8 +129,11 @@ export default function Calculator() {
   const [language, setLanguage] = useState('en');
   const [printView, setPrintView] = useState(null);
 
+
+
   const t = translations[language];
   const isRTL = language === 'he';
+
 
   useEffect(() => {
     // Check if there's a calculation to edit
@@ -146,7 +149,7 @@ export default function Calculator() {
         console.error('Error loading edit data:', error);
       }
     }
-  }, []); // Empty dependency array means this runs once on mount
+  }, []); 
 
   useEffect(() => {
     const handleAfterPrint = () => {
@@ -289,7 +292,7 @@ export default function Calculator() {
       setTimeout(() => setSaveMessage(""), 3000);
     }
   };
-  
+
   return (
     <>
       <style>{`
