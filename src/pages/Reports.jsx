@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { supabase } from "@/api/client"; 
 import { ROICalculation } from "@/api/entities";
 import { User } from "@/api/entities";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -21,13 +22,17 @@ export default function Reports() {
   const loadData = async () => {
     setIsLoading(true);
     try {
-      const user = await User.me();
+      const { data: userData } = await supabase.auth.getUser();
+      const user = userData?.user;
       setCurrentUser(user);
       
       // Filter calculations by current user
-      const allCalculations = await ROICalculation.list("-created_date");
-      const userCalculations = allCalculations.filter(calc => calc.created_by === user.email);
-      setCalculations(userCalculations);
+        const { data: userCalculations, error } = await supabase
+          .from('calculations')
+          .select('*')
+          .eq('user_id', user.id)
+          .order('created_at', { ascending: false });;
+      setCalculations(userCalculations || []);
     } catch (error) {
       console.error("Error loading data:", error);
     } finally {
@@ -42,7 +47,7 @@ export default function Reports() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `roi-report-${calc.company_name}-${format(new Date(calc.created_date), 'yyyy-MM-dd')}.json`;
+    a.download = `roi-report-${calc.company_name}-${format(new Date(calc.created_at), 'yyyy-MM-dd')}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -94,7 +99,7 @@ export default function Reports() {
               <CardHeader className="border-b border-slate-100">
                 <div className="flex items-center justify-between">
                   <CardTitle className="flex items-center gap-2 text-lg"><Building2 className="w-5 h-5 text-blue-600" />{calc.company_name}</CardTitle>
-                  <Badge variant="outline" className="text-xs"><Calendar className="w-3 h-3 mr-1" />{format(new Date(calc.created_date), 'MMM d, yyyy')}</Badge>
+                  <Badge variant="outline" className="text-xs"><Calendar className="w-3 h-3 mr-1" />{format(new Date(calc.created_at), 'MMM d, yyyy')}</Badge>
                 </div>
               </CardHeader>
               <CardContent className="p-6">

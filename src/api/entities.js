@@ -1,9 +1,9 @@
+import { supabase } from './client';
 
 
-
-export const ROICalculation = [];
+export const ROICalculation = supabase.from('calculations');
 
 
 
 // // auth sdk:
-export const User = [];
+export const User = supabase.auth;

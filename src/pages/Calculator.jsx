@@ -257,8 +257,16 @@ export default function Calculator() {
       return;
     }
     setIsSaving(true);
-    try {
-      await ROICalculation.create({
+  try {
+    // Get the current user ID
+    const { data: userData } = await supabase.auth.getUser();
+    const user_id = userData?.user?.id;
+
+    // Insert calculation into Supabase
+    const { error } = await supabase
+      .from('calculations')
+      .insert([{
+        user_id,
         company_name: inputs.company_name,
         inputs: inputs,
         results: {
@@ -267,8 +275,13 @@ export default function Calculator() {
           roi: calculations.roi,
           time_to_roi_months: calculations.time_to_roi_months,
         },
-      });
+      }]);
+
+    if (error) {
+      setSaveMessage("Error saving calculation. Please try again.");
+    } else {
       setSaveMessage("ROI calculation saved successfully!");
+    }
     } catch (error) {
       setSaveMessage("Error saving calculation. Please try again.");
     } finally {

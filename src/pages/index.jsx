@@ -3,6 +3,8 @@ import Layout from "./Layout.jsx";
 import Calculator from "./Calculator";
 
 import Reports from "./Reports";
+import Login from "./Login";
+import Signup from "./Signup";
 
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 
@@ -11,6 +13,8 @@ const PAGES = {
     Calculator: Calculator,
     
     Reports: Reports,
+    Login: Login,
+
     
 }
 
@@ -42,6 +46,8 @@ function PagesContent() {
                 <Route path="/Calculator" element={<Calculator />} />
                 
                 <Route path="/Reports" element={<Reports />} />
+                <Route path="/Login" element={<Login />} />
+                <Route path="/Signup" element={<Signup />} />
                 
             </Routes>
         </Layout>
