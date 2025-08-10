@@ -50,7 +50,7 @@ function PagesContent() {
 
 export default function Pages() {
     return (
-        <Router basename="/atera-roi-calc">
+        <Router>
             <PagesContent />
         </Router>
     );
