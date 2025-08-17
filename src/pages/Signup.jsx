@@ -48,6 +48,8 @@ export default function Signup() {
               onChange={e => setEmail(e.target.value)}
               required
               autoFocus
+              // pattern="^[^@\s]+@atera\.com$"
+              title="Use your @atera.com email"              
             />
             <Input
               type="password"
